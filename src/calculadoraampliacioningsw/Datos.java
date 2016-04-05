@@ -32,6 +32,7 @@ public class Datos {
                 }*/
     
     public Integer DamePrioridad (char c){
+        System.out.println("Commit prueba");
         Integer a = null;
 	switch (c){
             case '*' : a = 2;
