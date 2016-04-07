@@ -211,34 +211,45 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         btnDiv.requestFocus();
         btnIgual.requestFocus();
         
-        if (e.getSource() == btnNumero0)
+        if (e.getSource() == btnNumero0){
             resultado.setText(resultado.getText()+"0");
-        else if (e.getSource()==btnNumero1)
+            operador=false;
+        }
+        else if (e.getSource()==btnNumero1){
                 resultado.setText(resultado.getText()+"1");
-        else if (e.getSource()==btnNumero2)
+                operador=false;
+        }else if (e.getSource()==btnNumero2){
                 resultado.setText(resultado.getText()+"2");
-        else if (e.getSource()==btnNumero3)
+                operador=false;
+        }else if (e.getSource()==btnNumero3){
                 resultado.setText(resultado.getText()+"3");
-        else if (e.getSource()==btnNumero4)
+                operador=false;
+        }else if (e.getSource()==btnNumero4){
                 resultado.setText(resultado.getText()+"4");
-        else if (e.getSource()==btnNumero5)
+                operador=false;
+        }else if (e.getSource()==btnNumero5){
                 resultado.setText(resultado.getText()+"5");
-        else if (e.getSource()==btnNumero6)
+                operador=false;
+        }else if (e.getSource()==btnNumero6){
                 resultado.setText(resultado.getText()+"6");
-        else if (e.getSource()==btnNumero7)
+                operador=false;
+        }else if (e.getSource()==btnNumero7){
                 resultado.setText(resultado.getText()+"7");
-        else if (e.getSource()==btnNumero8)
+                operador=false;
+        }else if (e.getSource()==btnNumero8){
                 resultado.setText(resultado.getText()+"8");
-        else if (e.getSource()==btnNumero9)
+                operador=false;
+        }else if (e.getSource()==btnNumero9){
                 resultado.setText(resultado.getText()+"9");
-        else if (e.getSource()==btnParentA)
+                operador=false;
+        }else if (e.getSource()==btnParentA){
                 resultado.setText(resultado.getText()+"(");
-        else if (e.getSource()==btnParentC)
+        }else if (e.getSource()==btnParentC){
                 resultado.setText(resultado.getText()+")");
-        else if ((e.getSource()==btnPunto) && (contador!=true))
-        {
+        }else if ((e.getSource()==btnPunto) && (contador!=true)){
                 resultado.setText(resultado.getText()+".");
                 contador=true;
+                operador=true;
         }
         else if (e.getSource()==btnBorrar)
         {
@@ -255,51 +266,57 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         
         else if (e.getSource()==btnSuma)
         {
-            if(operador!=false){    
+            if(operador==false){    
                 double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.setNum1(dobleNum1);
+                d.addPilaNum(dobleNum1);
                 screen.setText(screen.getText()+ resultado.getText()+'+');
                 resultado.setText("");
-                d.setOper('+');
+                //d.setOper('+');
+                d.addPilaOper('+');
                 contador=false;
                 operador=true;
             }
         }
         else if (e.getSource()==btnResta)
         {
-            if (operador!=false){               
+            if (operador==false){               
                 double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.setNum1(dobleNum1);
+                d.addPilaNum(dobleNum1);
                 screen.setText(resultado.getText()+'-');
                 resultado.setText("");
-                d.setOper('-');
+                d.addPilaOper('-');
+                contador=false;
+                operador=true;
             }
         }
         else if (e.getSource()==btnMult)
         {
-            if (operador!=false){
+            if (operador==false){
                 double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.setNum1(dobleNum1);
+                d.addPilaNum(dobleNum1);
                 screen.setText(resultado.getText()+'*');
                 resultado.setText("");
-                d.setOper('*');
+                d.addPilaOper('*');
                 contador=false;
+                operador=true;
             }
         }
         else if (e.getSource()==btnDiv)
         {
+            if (operador==false){    
                 double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.setNum1(dobleNum1);
+                d.addPilaNum(dobleNum1);
                 screen.setText(resultado.getText()+'/');
                 resultado.setText("");
-                d.setOper('/');
+                d.addPilaOper('/');
                 contador=false;
-
+                operador=true;
+            }
         }
         else if (e.getSource()==btnIgual)
         {
                 double dobleNum2 = Double.parseDouble(resultado.getText());
-                d.setNum2(dobleNum2);
+                d.addPilaNum(dobleNum2);
                 screen.setText(screen.getText()+ resultado.getText());
                 d.getNum1();
                 d.getNum2();
@@ -325,6 +342,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
                                 break;
                 }
                 contador=false;
+                operador=false;
         }
     }
 

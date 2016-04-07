@@ -18,8 +18,14 @@ public class Datos {
     private double num1,num2;
     private char oper;
 
-    Stack pilaPrio = new Stack();
+    Stack <Double> pilaNum;
+    Stack pilaOper;
     private boolean esNumber;
+
+    public Datos() {
+        this.pilaNum = new Stack<Double>();
+        this.pilaOper = new Stack();
+    }
     
     
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +38,6 @@ public class Datos {
                 }*/
     
     public Integer DamePrioridad (char c){
-        System.out.println("Commit prueba");
         Integer a = null;
 	switch (c){
             case '*' : a = 2;
@@ -106,6 +111,14 @@ public class Datos {
     {
         total=this.getNum1()/this.getNum2();
         return (total);
+    }
+    
+    public void addPilaNum(double num){
+        pilaNum.push(num);
+    }
+    
+    public void addPilaOper(char oper){
+        pilaOper.push(oper);
     }
     
 }
