@@ -82,7 +82,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         contenedorN.setLayout(new GridLayout(2,1));
         
         Container contCentro1 = new Container();
-        contCentro1.setLayout(new GridLayout(4,3));
+        contCentro1.setLayout(new GridLayout(4,5));
         
         Container contenedorD = new Container();
         contenedorD.setLayout(new GridLayout(4,1));
@@ -147,41 +147,53 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         contenedorN.add(this.resultado);
         
         //añadir elementos al contenedor central
+        contCentro1.add(this.btnBorrar1);
         contCentro1.add(this.btnNumero7);
         contCentro1.add(this.btnNumero8);
         contCentro1.add(this.btnNumero9);
+        contCentro1.add(this.btnSuma);
+
+        contCentro1.add(this.btnBorrar);       
         contCentro1.add(this.btnNumero4);
         contCentro1.add(this.btnNumero5);
         contCentro1.add(this.btnNumero6);
+        contCentro1.add(this.btnResta);
+        
+        contCentro1.add(this.btnParentA);        
         contCentro1.add(this.btnNumero1);
         contCentro1.add(this.btnNumero2);
         contCentro1.add(this.btnNumero3);
+        contCentro1.add(this.btnMult);
+        
+        
+        contCentro1.add(this.btnParentC);     
         contCentro1.add(this.btnNumero0);     
         contCentro1.add(this.btnPunto);     
         contCentro1.add(this.btnIgual);     
+        contCentro1.add(this.btnDiv);     
         
         //añadir elementos al contenedor izquierda
-        contenedorI.add(this.btnBorrar1);
+       /* contenedorI.add(this.btnBorrar1);
         contenedorI.add(this.btnBorrar);
         contenedorI.add(this.btnParentA);
-        contenedorI.add(this.btnParentC);   
+        contenedorI.add(this.btnDiv);   
         
         //añadir elementos al contenedor derecha
         contenedorD.add(this.btnSuma);
         contenedorD.add(this.btnResta);
         contenedorD.add(this.btnMult);
         contenedorD.add(this.btnDiv);
-        
+        */
        
         //insercion de los gridlayouts en el borderLayout
         contenedor.add(contenedorN, BorderLayout.NORTH );
         contenedor.add(contCentro1, BorderLayout.CENTER);
-        contenedor.add(contenedorD, BorderLayout.EAST);
-        contenedor.add(contenedorI, BorderLayout.WEST);
+        //contenedor.add(contenedorD, BorderLayout.EAST);
+        //contenedor.add(contenedorI, BorderLayout.WEST);
         
         //propiedades del frame
         frame.getContentPane().add(contenedor);
-        frame.setSize(350, 400);
+        frame.setSize(450, 400);
         frame.setLocation(50, 50);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -210,6 +222,9 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         btnMult.requestFocus();
         btnDiv.requestFocus();
         btnIgual.requestFocus();
+        btnParentA.requestFocus();
+        btnParentC.requestFocus();
+        
         
         if (e.getSource() == btnNumero0)
             resultado.setText(resultado.getText()+"0");
