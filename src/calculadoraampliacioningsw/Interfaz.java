@@ -21,6 +21,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
     Datos d = new Datos();
     //contador punto
     boolean contador=false;
+    boolean operador=false;
 
     //creacion imagenes para añadir a botones
     ImageIcon cero=new ImageIcon("Captura0.JPG");
@@ -35,6 +36,14 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
     ImageIcon nueve=new ImageIcon("Captura9.JPG");
     ImageIcon punto=new ImageIcon("CapturaPunto.JPG");
     ImageIcon igual=new ImageIcon("CapturaIgual.JPG");
+    ImageIcon suma=new ImageIcon("CapturaMas.JPG");
+    ImageIcon resta=new ImageIcon("CapturaMenos.JPG");
+    ImageIcon mult=new ImageIcon("CapturaPor.JPG");
+    ImageIcon div=new ImageIcon("CapturaDivision.JPG");
+    ImageIcon c=new ImageIcon("CapturaC.JPG");
+    ImageIcon ce=new ImageIcon("CapturaCE.JPG");
+    ImageIcon abrirPar=new ImageIcon("CapturaAbreParent.JPG");
+    ImageIcon cerrarPar=new ImageIcon("CapturaCierraParent.JPG"); 
     
     //creacion botones calculadora
     private JButton btnNumero0=new JButton (cero);
@@ -48,16 +57,16 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
     private JButton btnNumero8=new JButton (ocho);
     private JButton btnNumero9=new JButton (nueve);
     private JButton btnPunto=new JButton (punto);
-    private JButton btnBorrar=new JButton ("C");
-    private JButton btnBorrar1=new JButton ("CE");
-    private JButton btnParentA=new JButton ("(");
-    private JButton btnParentC=new JButton (")");
+    private JButton btnBorrar=new JButton (c);
+    private JButton btnBorrar1=new JButton (ce);
+    private JButton btnParentA=new JButton (abrirPar);
+    private JButton btnParentC=new JButton (cerrarPar);
     
     private JButton btnIgual=new JButton (igual);
-    private JButton btnSuma=new JButton ("+");
-    private JButton btnResta=new JButton ("-");
-    private JButton btnMult=new JButton ("*");
-    private JButton btnDiv=new JButton ("/");
+    private JButton btnSuma=new JButton (suma);
+    private JButton btnResta=new JButton (resta);
+    private JButton btnMult=new JButton (mult);
+    private JButton btnDiv=new JButton (div);
     
     private JTextField screen= new JTextField(30);
     private JTextField resultado= new JTextField(30);
@@ -79,7 +88,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         contenedorD.setLayout(new GridLayout(4,1));
         
         Container contenedorI = new Container();
-        contenedorI.setLayout(new GridLayout(2,1));
+        contenedorI.setLayout(new GridLayout(4,1));
 
         
         btnNumero0.addActionListener(this);
@@ -172,7 +181,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         
         //propiedades del frame
         frame.getContentPane().add(contenedor);
-        frame.setSize(400, 300);
+        frame.setSize(350, 400);
         frame.setLocation(50, 50);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -246,30 +255,36 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         
         else if (e.getSource()==btnSuma)
         {
+            if(operador!=false){    
                 double dobleNum1 = Double.parseDouble(resultado.getText());
                 d.setNum1(dobleNum1);
                 screen.setText(screen.getText()+ resultado.getText()+'+');
                 resultado.setText("");
                 d.setOper('+');
                 contador=false;
+                operador=true;
+            }
         }
         else if (e.getSource()==btnResta)
         {
+            if (operador!=false){               
                 double dobleNum1 = Double.parseDouble(resultado.getText());
                 d.setNum1(dobleNum1);
                 screen.setText(resultado.getText()+'-');
                 resultado.setText("");
                 d.setOper('-');
+            }
         }
         else if (e.getSource()==btnMult)
         {
+            if (operador!=false){
                 double dobleNum1 = Double.parseDouble(resultado.getText());
                 d.setNum1(dobleNum1);
                 screen.setText(resultado.getText()+'*');
                 resultado.setText("");
                 d.setOper('*');
                 contador=false;
-
+            }
         }
         else if (e.getSource()==btnDiv)
         {
