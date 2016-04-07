@@ -309,32 +309,43 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         }
         else if (e.getSource()==btnIgual)
         {
+            String stringTotal="";
+            while(!d.pilaNum.empty()){
                 double dobleNum2 = Double.parseDouble(resultado.getText());
                 d.addPilaNum(dobleNum2);
                 screen.setText(screen.getText()+ resultado.getText());
-                d.getNum1();
-                d.getNum2();
-                switch(d.getOper())
-                {
-                    case '+':   d.setTotal(d.suma());
-                                String stringTotal = String.valueOf(d.getTotal());
-                                resultado.setText(stringTotal);
+                d.setNum1(d.getPilaNum());
+                d.setNum2(d.getPilaNum());
+                //d.getNum1();
+                //d.getNum2();
+                switch(d.getPilaOper()){
+                
+                    case '+':   
+                                d.setTotal(d.suma());
+                                stringTotal.concat(String.valueOf(d.getTotal()));
+                                //resultado.setText(stringTotal);
+                                d.addPilaNum(d.getTotal());
                                 break;
                     case '-':   d.setTotal(d.resta());
                                 String stringTotal2 = String.valueOf(d.getTotal());
                                 resultado.setText(stringTotal2);
+                                d.addPilaNum(d.getTotal());
                                 break;
                         
                     case '*':   d.setTotal(d.mult());
                                 String stringTotal3 = String.valueOf(d.getTotal());
                                 resultado.setText(stringTotal3);
+                                d.addPilaNum(d.getTotal());
                                 break;
                         
                     case '/':    d.setTotal(d.div());
                                 String stringTotal4 = String.valueOf(d.getTotal());
                                 resultado.setText(stringTotal4);
+                                d.addPilaNum(d.getTotal());
                                 break;
                 }
+            }//end-while
+                resultado.setText(stringTotal);
                 contador=false;
                 operador=false;
         }

@@ -121,4 +121,18 @@ public class Datos {
         pilaOper.push(oper);
     }
     
+    public double getPilaNum (){
+        if (!pilaNum.empty()){
+            return pilaNum.pop();
+        }
+        return 0;
+    }
+    
+    public char getPilaOper (){
+        if (!pilaOper.empty()){
+            return (char) pilaOper.pop();
+        }
+        return 0;
+    }
+    
 }
