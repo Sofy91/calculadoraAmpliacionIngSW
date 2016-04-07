@@ -84,13 +84,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         Container contCentro1 = new Container();
         contCentro1.setLayout(new GridLayout(4,5));
         
-        Container contenedorD = new Container();
-        contenedorD.setLayout(new GridLayout(4,1));
-        
-        Container contenedorI = new Container();
-        contenedorI.setLayout(new GridLayout(4,1));
-
-        
+      
         btnNumero0.addActionListener(this);
         btnNumero1.addActionListener(this);
         btnNumero2.addActionListener(this);
@@ -171,25 +165,10 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
         contCentro1.add(this.btnPunto);     
         contCentro1.add(this.btnIgual);     
         contCentro1.add(this.btnDiv);     
-        
-        //añadir elementos al contenedor izquierda
-       /* contenedorI.add(this.btnBorrar1);
-        contenedorI.add(this.btnBorrar);
-        contenedorI.add(this.btnParentA);
-        contenedorI.add(this.btnDiv);   
-        
-        //añadir elementos al contenedor derecha
-        contenedorD.add(this.btnSuma);
-        contenedorD.add(this.btnResta);
-        contenedorD.add(this.btnMult);
-        contenedorD.add(this.btnDiv);
-        */
        
         //insercion de los gridlayouts en el borderLayout
         contenedor.add(contenedorN, BorderLayout.NORTH );
         contenedor.add(contCentro1, BorderLayout.CENTER);
-        //contenedor.add(contenedorD, BorderLayout.EAST);
-        //contenedor.add(contenedorI, BorderLayout.WEST);
         
         //propiedades del frame
         frame.getContentPane().add(contenedor);
