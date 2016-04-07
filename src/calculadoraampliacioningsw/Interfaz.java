@@ -22,6 +22,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
     //contador punto
     boolean contador=false;
     boolean operador=false;
+    int contadorParent=0;
 
     //creacion imagenes para añadir a botones
     ImageIcon cero=new ImageIcon("Captura0.JPG");
@@ -237,11 +238,17 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener{
                 resultado.setText(resultado.getText()+"9");
                 operador=false;
         }else if (e.getSource()==btnParentA){
-                resultado.setText(resultado.getText()+"(");
+                resultado.setText(resultado.getText()+ "(");
+                contadorParent++;
         }else if (e.getSource()==btnParentC){
-                resultado.setText(resultado.getText()+")");
+                while(contadorParent!=0){
+                    resultado.setText(resultado.getText()+ ")");
+                    contadorParent--;
+                    break;
+                }
+                
         }else if ((e.getSource()==btnPunto) && (contador!=true)){
-                resultado.setText(resultado.getText()+".");
+                resultado.setText(resultado.getText()+ ".");
                 contador=true;
                 operador=true;
         }
