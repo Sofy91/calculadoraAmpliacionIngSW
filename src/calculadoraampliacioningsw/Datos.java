@@ -18,8 +18,8 @@ public class Datos {
     private double num1,num2;
     private char oper;
 
-    Stack <Double> pilaNum;
-    Stack pilaOper;
+    private Stack <Double> pilaNum;
+    private Stack pilaOper;
     private boolean esNumber;
 
     public Datos() {
@@ -133,6 +133,10 @@ public class Datos {
             return (char) pilaOper.pop();
         }
         return 0;
+    }
+    
+    public boolean esPilaNumVacia(){
+        return pilaNum.empty();
     }
     
 }
