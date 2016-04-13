@@ -328,6 +328,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 contadorParent++;
                 contPar++;
                 btnIgual.setEnabled(false);
+                //d.addPilaOper('(', true);
             }
         } else if (e.getSource() == btnParentC) {
             if ((!resultado.getText().endsWith(".")) && (!resultado.getText().endsWith("+"))
@@ -336,6 +337,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                     while (contPar != 0) {
                         resultado.setText(resultado.getText() + ")");
                         contPar--;
+                        //d.addPilaOper(')', true);
                     }
             }
 
@@ -366,23 +368,39 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             while(!d.esPilaOperVacia())
                 d.getPilaOper();
             contador = false;
-            resultIgual=false;
+            resultIgual=true;
             menorPrio = false;
             btnIgual.setEnabled(true);
-            operador = true;
+            operador = false;
             
         } else if (e.getSource() == btnBorrar1) { //Borrar numero
-            String borrarNum =resultado.getText();
-            if (!borrarNum.endsWith("+") && !borrarNum.endsWith("-") && !borrarNum.endsWith("*") 
-                    && !borrarNum.endsWith("/") && !borrarNum.endsWith("(") && !borrarNum.endsWith(")")
-                    && !borrarNum.endsWith(".")){
-                borrarNum= borrarNum.substring(0, borrarNum.length()-1);
-                if (borrarNum.endsWith("+") || borrarNum.endsWith("-") || borrarNum.endsWith("*") 
-                    || borrarNum.endsWith("/") || borrarNum.endsWith("(") || borrarNum.endsWith(")"))
-                    btnIgual.setEnabled(false);
-            }//end-if
-            resultado.setText(borrarNum);            
-            //contador = false;
+            if (resultIgual==true){
+                resultado.setText("");
+                screen.setText("");
+                while(!d.esPilaNumVacia())
+                    d.getPilaNum();
+                while(!d.esPilaOperVacia())
+                    d.getPilaOper();
+                contador = false;
+                resultIgual=true;
+                menorPrio = false;
+                btnIgual.setEnabled(true);
+                operador = false;
+            }else{
+                String borrarNum =resultado.getText();
+                if (!borrarNum.endsWith("+") && !borrarNum.endsWith("-") && !borrarNum.endsWith("*") 
+                        && !borrarNum.endsWith("/") && !borrarNum.endsWith("(") && !borrarNum.endsWith(")")
+                        && !borrarNum.endsWith(".") && !borrarNum.equals("")){
+                    borrarNum= borrarNum.substring(0, borrarNum.length()-1);
+                    if (borrarNum.endsWith("+") || borrarNum.endsWith("-") || borrarNum.endsWith("*") 
+                        || borrarNum.endsWith("/") || borrarNum.endsWith("(") || borrarNum.endsWith(")")){
+                        btnIgual.setEnabled(false);
+                        operador = true;
+                    }
+                }//end-if
+                resultado.setText(borrarNum);            
+                //contador = false;
+            }
         } else if (e.getSource() == btnSuma) {
             if (operador == false) {
                 double num = d.transformaDouble(resultado.getText());
@@ -390,7 +408,6 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 if (contadorParent>0){
                     menorPrio =d.addPilaOper('+', true);
                     menorPrio=false;
-                    contadorParent--;
                 }
                 else
                     menorPrio =d.addPilaOper('+', false);
@@ -407,7 +424,6 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 if (contadorParent>0){
                     menorPrio =d.addPilaOper('-', true);
                     menorPrio=false;
-                    contadorParent--;
                 }
                 else
                     menorPrio =d.addPilaOper('-', false);                
@@ -419,7 +435,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             }
         } else if (e.getSource() == btnMult) {
             menorPrio=false;
-            if (operador == false) {
+            if (operador == false && resultIgual==false) {
                 double num = d.transformaDouble(resultado.getText());
                 d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '*');
@@ -432,7 +448,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             }
         } else if (e.getSource() == btnDiv) {
             menorPrio=false;
-            if (operador == false) {
+            if (operador == false && resultIgual==false) {
                 double num = d.transformaDouble(resultado.getText());
                 d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '/');
