@@ -19,9 +19,12 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
 
     Datos d = new Datos();
     //contador punto
-    boolean contador = false;
+    boolean contador = false; //Booleano para saber si se ha escrito "."
     boolean operador = false;
-    int contadorParent = 0;
+    boolean resultIgual = false; //Booleano para saber si se ha producido un resultado
+    int contadorParent = 0; //Cuenta el numero de parentesis para controlar los cierres de parentesis
+    boolean menorPrio =false; //Prioridad + o -
+    int contPar= 0; //Cuenta el numero de parentesis para controlar las operaciones
 
     //creacion imagenes para añadir a botones
     ImageIcon cero = new ImageIcon("Captura0.JPG");
@@ -198,149 +201,306 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
         btnParentC.requestFocus();
 
         if (e.getSource() == btnNumero0) {
-            resultado.setText(resultado.getText() + "0");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("0");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "0");
+            }
             operador = false;
+            resultIgual=false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero1) {
-            resultado.setText(resultado.getText() + "1");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("1");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "1");
+            }
             operador = false;
+            resultIgual=false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero2) {
-            resultado.setText(resultado.getText() + "2");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("2");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "2");
+            }
             operador = false;
+            resultIgual=false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero3) {
-            resultado.setText(resultado.getText() + "3");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("3");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "3");
+            }
             operador = false;
+            resultIgual=false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero4) {
-            resultado.setText(resultado.getText() + "4");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("4");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "4");
+            }
             operador = false;
+            resultIgual=false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero5) {
-            resultado.setText(resultado.getText() + "5");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("5");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "5");
+            }
+            resultIgual=false;
             operador = false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero6) {
-            resultado.setText(resultado.getText() + "6");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("6");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "6");
+            }
+            resultIgual=false;
             operador = false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero7) {
-            resultado.setText(resultado.getText() + "7");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("7");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "7");
+            }
+            resultIgual=false;
             operador = false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero8) {
-            resultado.setText(resultado.getText() + "8");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("8");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "8");
+            }
+            resultIgual=false;
             operador = false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnNumero9) {
-            resultado.setText(resultado.getText() + "9");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("9");
+                d.getPilaNum();
+            }
+            else{
+                resultado.setText(resultado.getText() + "9");
+            }
+            resultIgual=false;
             operador = false;
+            btnIgual.setEnabled(true);
         } else if (e.getSource() == btnParentA) {
             if ((!resultado.getText().endsWith(".")) && (resultado.getText().endsWith("+"))
                     || (resultado.getText().endsWith("-")) || (resultado.getText().endsWith("*"))
                     || (resultado.getText().endsWith("/"))) {
                 resultado.setText(resultado.getText() + "(");
                 contadorParent++;
+                contPar++;
+                btnIgual.setEnabled(false);
             }
         } else if (e.getSource() == btnParentC) {
-            if ((!resultado.getText().endsWith(".")) && (resultado.getText().endsWith("+"))
-                    || (resultado.getText().endsWith("-")) || (resultado.getText().endsWith("*"))
-                    || (resultado.getText().endsWith("/")) && (!resultado.getText().endsWith("("))) {
-                while (contadorParent != 0) {
-                    resultado.setText(resultado.getText() + ")");
-                    contadorParent--;
-                    break;
-                }
+            if ((!resultado.getText().endsWith(".")) && (!resultado.getText().endsWith("+"))
+                    && (!resultado.getText().endsWith("-")) && (!resultado.getText().endsWith("*"))
+                    && (!resultado.getText().endsWith("/")) && (!resultado.getText().endsWith("("))) {
+                    while (contPar != 0) {
+                        resultado.setText(resultado.getText() + ")");
+                        contPar--;
+                    }
             }
 
         } else if ((e.getSource() == btnPunto) && (contador != true)) {
-            resultado.setText(resultado.getText() + ".");
+            if(resultIgual==true){
+                screen.setText("");
+                resultado.setText("0.");
+                d.getPilaNum();
+                btnIgual.setEnabled(false);
+            }else{
+                if ((resultado.getText().endsWith("+")) || (resultado.getText().endsWith("-")) 
+                        || (resultado.getText().endsWith("*")) || (resultado.getText().endsWith("/")) 
+                        || (resultado.getText().equals(""))
+                        || (resultado.getText().endsWith("(")) || (resultado.getText().endsWith(")"))) {
+                    resultado.setText(resultado.getText() + "0.");
+                }
+                else
+                    resultado.setText(resultado.getText() + ".");
+            }
             contador = true;
             operador = true;
-        } else if (e.getSource() == btnBorrar) {
+            resultIgual=false;
+        } else if (e.getSource() == btnBorrar) { //Borrar TODO
             resultado.setText("");
+            screen.setText("");
+            while(!d.esPilaNumVacia())
+                d.getPilaNum();
+            while(!d.esPilaOperVacia())
+                d.getPilaOper();
             contador = false;
-        } else if (e.getSource() == btnBorrar1) {
-            d.setNum1(0);
-            d.setNum2(0);
-            resultado.setText("");
-            contador = false;
+            resultIgual=false;
+            menorPrio = false;
+            btnIgual.setEnabled(true);
+            operador = true;
+            
+        } else if (e.getSource() == btnBorrar1) { //Borrar numero
+            String borrarNum =resultado.getText();
+            if (!borrarNum.endsWith("+") && !borrarNum.endsWith("-") && !borrarNum.endsWith("*") 
+                    && !borrarNum.endsWith("/") && !borrarNum.endsWith("(") && !borrarNum.endsWith(")")
+                    && !borrarNum.endsWith(".")){
+                borrarNum= borrarNum.substring(0, borrarNum.length()-1);
+                if (borrarNum.endsWith("+") || borrarNum.endsWith("-") || borrarNum.endsWith("*") 
+                    || borrarNum.endsWith("/") || borrarNum.endsWith("(") || borrarNum.endsWith(")"))
+                    btnIgual.setEnabled(false);
+            }//end-if
+            resultado.setText(borrarNum);            
+            //contador = false;
         } else if (e.getSource() == btnSuma) {
             if (operador == false) {
-                double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.addPilaNum(dobleNum1);
-                resultado.setText(resultado.getText() + /*resultado.getText()+ */ '+');
-                //resultado.setText("");
-                //d.setOper('+');
-                d.addPilaOper('+');
+                double num = d.transformaDouble(resultado.getText());
+                d.addPilaNum(num, menorPrio);
+                if (contadorParent>0){
+                    menorPrio =d.addPilaOper('+', true);
+                    menorPrio=false;
+                    contadorParent--;
+                }
+                else
+                    menorPrio =d.addPilaOper('+', false);
+                resultado.setText(resultado.getText() + '+');                
                 contador = false;
                 operador = true;
+                resultIgual=false;
+                btnIgual.setEnabled(false);
             }
         } else if (e.getSource() == btnResta) {
             if (operador == false) {
-                double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.addPilaNum(dobleNum1);
+                double num = d.transformaDouble(resultado.getText());
+                d.addPilaNum(num, menorPrio);
+                if (contadorParent>0){
+                    menorPrio =d.addPilaOper('-', true);
+                    menorPrio=false;
+                    contadorParent--;
+                }
+                else
+                    menorPrio =d.addPilaOper('-', false);                
                 resultado.setText(resultado.getText() + '-');
-                //resultado.setText("");
-                d.addPilaOper('-');
                 contador = false;
                 operador = true;
+                resultIgual=false;
+                btnIgual.setEnabled(false);
             }
         } else if (e.getSource() == btnMult) {
+            menorPrio=false;
             if (operador == false) {
-                double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.addPilaNum(dobleNum1);
+                double num = d.transformaDouble(resultado.getText());
+                d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '*');
-                //resultado.setText("");
-                d.addPilaOper('*');
+                d.addPilaOper('*',false);
                 contador = false;
                 operador = true;
+                resultIgual=false;
+                menorPrio = false;
+                btnIgual.setEnabled(false);
             }
         } else if (e.getSource() == btnDiv) {
+            menorPrio=false;
             if (operador == false) {
-                double dobleNum1 = Double.parseDouble(resultado.getText());
-                d.addPilaNum(dobleNum1);
+                double num = d.transformaDouble(resultado.getText());
+                d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '/');
-                //resultado.setText("");
-                d.addPilaOper('/');
+                d.addPilaOper('/',false);
                 contador = false;
                 operador = true;
+                resultIgual=false;
+                menorPrio = false;
+                btnIgual.setEnabled(false);
             }
         } else if (e.getSource() == btnIgual) {
             String stringTotal = "";
-            while (!d.esPilaNumVacia()) {
-                double dobleNum2 = Double.parseDouble(resultado.getText());
-                d.addPilaNum(dobleNum2);
-                screen.setText(screen.getText() + resultado.getText());
+            String par="";
+            boolean error=false;
+            screen.setText("");
+            double num = d.transformaDouble(resultado.getText());
+            d.addPilaNum(num,menorPrio);
+            screen.setText(screen.getText() + resultado.getText());
+            while (contPar > 0) {
+                par+=(")");
+                contPar--;
+                if (contPar==0)
+                    screen.setText(resultado.getText() + par);
+            }          
+            while (!d.esPilaOperVacia()) {
                 d.setNum1(d.getPilaNum());
                 d.setNum2(d.getPilaNum());
-                //d.getNum1();
-                //d.getNum2();
+                
                 switch (d.getPilaOper()) {
 
                     case '+':
                         d.setTotal(d.suma());
-                        stringTotal.concat(String.valueOf(d.getTotal()));
-                        //resultado.setText(stringTotal);
-                        d.addPilaNum(d.getTotal());
+                        d.addPilaNum(d.getTotal(),false);
                         break;
                     case '-':
                         d.setTotal(d.resta());
-                        String stringTotal2 = String.valueOf(d.getTotal());
-                        resultado.setText(stringTotal2);
-                        d.addPilaNum(d.getTotal());
+                        d.addPilaNum(d.getTotal(),false);
                         break;
 
                     case '*':
                         d.setTotal(d.mult());
-                        String stringTotal3 = String.valueOf(d.getTotal());
-                        resultado.setText(stringTotal3);
-                        d.addPilaNum(d.getTotal());
+                        d.addPilaNum(d.getTotal(),false);
                         break;
 
                     case '/':
-                        d.setTotal(d.div());
-                        String stringTotal4 = String.valueOf(d.getTotal());
-                        resultado.setText(stringTotal4);
-                        d.addPilaNum(d.getTotal());
+                        if (d.getNum1()!=0){
+                            d.setTotal(d.div());
+                            d.addPilaNum(d.getTotal(),false);
+                        }else{
+                            screen.setText("Error Div /0");
+                            resultado.setText("");
+                            error=true;
+                            while(!d.esPilaNumVacia())
+                                d.getPilaNum();
+                            while(!d.esPilaOperVacia())
+                                d.getPilaOper();
+                        }
                         break;
                 }
             }//end-while
-            resultado.setText(stringTotal);
+            if (error==false){
+                stringTotal= (String.valueOf(d.getPilaNum()));
+                resultado.setText(stringTotal);
+            }
             contador = false;
             operador = false;
+            resultIgual = true;
+            menorPrio = false;
         }
     }
 

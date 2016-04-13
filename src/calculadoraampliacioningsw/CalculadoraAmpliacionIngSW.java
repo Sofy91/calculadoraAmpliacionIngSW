@@ -14,7 +14,6 @@ public class CalculadoraAmpliacionIngSW {
         
         Interfaz i = new Interfaz();
         System.out.println("Calculadora AIS");
-        System.out.println("Ejemplo Merge Control de versiones");
     }
 
 }
