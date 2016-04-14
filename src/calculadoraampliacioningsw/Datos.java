@@ -188,6 +188,10 @@ public class Datos {
             num= Double.parseDouble(aux2);
         return num;
     }//end-transformaDouble
+
+    public double getPeekNum() {
+        return pilaNum.peek();
+    }
    
   
 }//end-Datos

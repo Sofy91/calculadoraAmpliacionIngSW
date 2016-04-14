@@ -200,7 +200,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
         btnParentA.requestFocus();
         btnParentC.requestFocus();
 
-        if (e.getSource() == btnNumero0) {
+        if (e.getSource() == btnNumero0 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("0");
@@ -212,7 +212,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             operador = false;
             resultIgual=false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero1) {
+        } else if (e.getSource() == btnNumero1 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("1");
@@ -224,7 +224,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             operador = false;
             resultIgual=false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero2) {
+        } else if (e.getSource() == btnNumero2 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("2");
@@ -236,7 +236,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             operador = false;
             resultIgual=false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero3) {
+        } else if (e.getSource() == btnNumero3 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("3");
@@ -248,7 +248,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             operador = false;
             resultIgual=false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero4) {
+        } else if (e.getSource() == btnNumero4 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("4");
@@ -260,7 +260,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             operador = false;
             resultIgual=false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero5) {
+        } else if (e.getSource() == btnNumero5 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("5");
@@ -272,7 +272,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             resultIgual=false;
             operador = false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero6) {
+        } else if (e.getSource() == btnNumero6 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("6");
@@ -284,7 +284,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             resultIgual=false;
             operador = false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero7) {
+        } else if (e.getSource() == btnNumero7 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("7");
@@ -296,7 +296,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             resultIgual=false;
             operador = false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero8) {
+        } else if (e.getSource() == btnNumero8 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("8");
@@ -308,7 +308,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             resultIgual=false;
             operador = false;
             btnIgual.setEnabled(true);
-        } else if (e.getSource() == btnNumero9) {
+        } else if (e.getSource() == btnNumero9 && !resultado.getText().endsWith(")")) {
             if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("9");
@@ -333,12 +333,13 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
         } else if (e.getSource() == btnParentC) {
             if ((!resultado.getText().endsWith(".")) && (!resultado.getText().endsWith("+"))
                     && (!resultado.getText().endsWith("-")) && (!resultado.getText().endsWith("*"))
-                    && (!resultado.getText().endsWith("/")) && (!resultado.getText().endsWith("("))) {
-                    while (contPar != 0) {
+                    && (!resultado.getText().endsWith("/")) && (!resultado.getText().endsWith("(")) 
+                    && contPar>0) {
+                    //while (contPar != 0) {
                         resultado.setText(resultado.getText() + ")");
                         contPar--;
                         //d.addPilaOper(')', true);
-                    }
+                    //}
             }
 
         } else if ((e.getSource() == btnPunto) && (contador != true)) {
@@ -435,7 +436,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             }
         } else if (e.getSource() == btnMult) {
             menorPrio=false;
-            if (operador == false && resultIgual==false) {
+            if (operador == false && !d.esPilaNumVacia()) {
                 double num = d.transformaDouble(resultado.getText());
                 d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '*');
@@ -448,7 +449,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             }
         } else if (e.getSource() == btnDiv) {
             menorPrio=false;
-            if (operador == false && resultIgual==false) {
+            if (operador == false && !d.esPilaNumVacia()) {
                 double num = d.transformaDouble(resultado.getText());
                 d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '/');
@@ -510,7 +511,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 }
             }//end-while
             if (error==false){
-                stringTotal= (String.valueOf(d.getPilaNum()));
+                stringTotal= (String.valueOf(d.getPeekNum()));
                 resultado.setText(stringTotal);
             }
             contador = false;
