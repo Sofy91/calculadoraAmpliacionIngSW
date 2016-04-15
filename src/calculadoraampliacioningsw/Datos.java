@@ -95,9 +95,9 @@ public class Datos {
         return (total);
     }
     
-    public double resta()
+    public double resta(boolean neg)
     {
-        if (this.getNum1()<0)
+        if (this.getNum1()<0 && neg==false)
             total=this.getNum2()+ this.getNum1();
         else
             total=this.getNum2()- this.getNum1();
@@ -135,9 +135,11 @@ public class Datos {
                 operAux = (char) pilaOper.pop();
                 pilaOper.push(oper);
                 pilaOper.push(operAux);
-            }else 
-            pilaOper.push(oper);
-            return true;
+                return true;
+            }else{ 
+                pilaOper.push(oper);
+                return false;
+            }
         } else {
             pilaOper.push(oper);
             return false;

@@ -25,6 +25,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
     int contadorParent = 0; //Cuenta el numero de parentesis para controlar los cierres de parentesis
     boolean menorPrio =false; //Prioridad + o -
     int contPar= 0; //Cuenta el numero de parentesis para controlar las operaciones
+    boolean neg= false; //booleano para controlar los negativos
 
     //creacion imagenes para añadir a botones
     ImageIcon cero = new ImageIcon("Captura0.JPG");
@@ -343,7 +344,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             }
 
         } else if ((e.getSource() == btnPunto) && (contador != true)) {
-            if(resultIgual==true){
+           /* if(resultIgual==true){
                 screen.setText("");
                 resultado.setText("0.");
                 d.getPilaNum();
@@ -355,12 +356,20 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                         || (resultado.getText().endsWith("(")) || (resultado.getText().endsWith(")"))) {
                     resultado.setText(resultado.getText() + "0.");
                 }
-                else
+                else*/
+            if ((!resultado.getText().endsWith(".")) && (!resultado.getText().endsWith("+"))
+                    && (!resultado.getText().endsWith("-")) && (!resultado.getText().endsWith("*"))
+                    && (!resultado.getText().endsWith("/")) && (!resultado.getText().endsWith("("))
+                    && (!resultado.getText().endsWith(")")) && (!resultado.getText().equals(""))
+                    && (resultIgual==false)){
+                   
                     resultado.setText(resultado.getText() + ".");
+                    contador = true;
+                    operador = true;
+                    resultIgual=false;
             }
-            contador = true;
-            operador = true;
-            resultIgual=false;
+           // }
+            
         } else if (e.getSource() == btnBorrar) { //Borrar TODO
             resultado.setText("");
             screen.setText("");
@@ -391,13 +400,16 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 String borrarNum =resultado.getText();
                 if (!borrarNum.endsWith("+") && !borrarNum.endsWith("-") && !borrarNum.endsWith("*") 
                         && !borrarNum.endsWith("/") && !borrarNum.endsWith("(") && !borrarNum.endsWith(")")
-                        && !borrarNum.endsWith(".") && !borrarNum.equals("")){
+                        && !borrarNum.equals("")){
+                    if (borrarNum.endsWith("."))
+                        contador=false;
                     borrarNum= borrarNum.substring(0, borrarNum.length()-1);
                     if (borrarNum.endsWith("+") || borrarNum.endsWith("-") || borrarNum.endsWith("*") 
                         || borrarNum.endsWith("/") || borrarNum.endsWith("(") || borrarNum.endsWith(")")){
                         btnIgual.setEnabled(false);
                         operador = true;
                     }
+                    
                 }//end-if
                 resultado.setText(borrarNum);            
                 //contador = false;
@@ -419,15 +431,21 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 btnIgual.setEnabled(false);
             }
         } else if (e.getSource() == btnResta) {
-            if (operador == false) {
-                double num = d.transformaDouble(resultado.getText());
-                d.addPilaNum(num, menorPrio);
-                if (contadorParent>0){
-                    menorPrio =d.addPilaOper('-', true);
-                    menorPrio=false;
+            if (operador == false || resultado.getText().endsWith("(")) {
+                if (!resultado.getText().endsWith("(") && !resultado.getText().equals("")){
+                    double num = d.transformaDouble(resultado.getText());
+                    d.addPilaNum(num, menorPrio);
+                    if (contadorParent>0){
+                        if (!resultado.getText().endsWith("(")){
+                            menorPrio =d.addPilaOper('-', true);
+                            menorPrio=false;
+                        }
+                    }
+                    else
+                        menorPrio =d.addPilaOper('-', false);
                 }
                 else
-                    menorPrio =d.addPilaOper('-', false);                
+                    neg=true;
                 resultado.setText(resultado.getText() + '-');
                 contador = false;
                 operador = true;
@@ -436,7 +454,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             }
         } else if (e.getSource() == btnMult) {
             menorPrio=false;
-            if (operador == false && !d.esPilaNumVacia()) {
+            if (operador == false && (resultIgual==false || !d.esPilaNumVacia())) {
                 double num = d.transformaDouble(resultado.getText());
                 d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '*');
@@ -449,7 +467,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
             }
         } else if (e.getSource() == btnDiv) {
             menorPrio=false;
-            if (operador == false && !d.esPilaNumVacia()) {
+            if (operador == false && (resultIgual==false || !d.esPilaNumVacia())) {
                 double num = d.transformaDouble(resultado.getText());
                 d.addPilaNum(num, menorPrio);
                 resultado.setText(resultado.getText() + '/');
@@ -485,7 +503,7 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                         d.addPilaNum(d.getTotal(),false);
                         break;
                     case '-':
-                        d.setTotal(d.resta());
+                        d.setTotal(d.resta(neg));
                         d.addPilaNum(d.getTotal(),false);
                         break;
 
