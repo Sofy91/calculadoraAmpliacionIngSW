@@ -10,6 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 /**
  *
@@ -491,13 +496,29 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 contPar--;
                 if (contPar==0)
                     screen.setText(resultado.getText() + par);
-            }          
+            }      
+            ScriptEngineManager manager = new ScriptEngineManager();
+            ScriptEngine engine =manager.getEngineByName("js");
+            
+            try {
+                Object a = engine.eval(resultado.getText());
+                if (a.toString().equals("Infinity") || a.toString().equals("NaN")){
+                    screen.setText("Error Div /0");
+                    resultado.setText("");
+                    error=true;
+                }
+                else
+                    resultado.setText(a.toString());
+            } catch (ScriptException ex) {
+                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            /*
             while (!d.esPilaOperVacia()) {
                 d.setNum1(d.getPilaNum());
                 d.setNum2(d.getPilaNum());
                 
                 switch (d.getPilaOper()) {
-
+ 
                     case '+':
                         d.setTotal(d.suma());
                         d.addPilaNum(d.getTotal(),false);
@@ -529,9 +550,9 @@ public class Interfaz extends JFrame implements ActionListener, KeyListener {
                 }
             }//end-while
             if (error==false){
-                stringTotal= (String.valueOf(d.getPeekNum()));
-                resultado.setText(stringTotal);
-            }
+                //stringTotal= (String.valueOf(d.getPeekNum()));
+                resultado.setText();
+            }*/
             contador = false;
             operador = false;
             resultIgual = true;
